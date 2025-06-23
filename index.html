@@ -10,7 +10,9 @@
     <p>Check the console to see the API results</p>
 
     <script>
-        setInterval(() => {
+        // Call Deck of Cards API every second for 10 seconds
+        let count = 0;
+        const interval = setInterval(() => {
             fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
                 .then(response => response.json())
                 .then(data => {
@@ -27,6 +29,16 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
+            count++;
+            if (count >= 10) {
+                clearInterval(interval);
+                // Print current DOM
+                console.log(document.documentElement.outerHTML);
+                // Redirect to x.com (script will stop here)
+                setTimeout(() => {
+                    window.location = "https://x.com/joshm/status/1934819799701573724";
+                }, 1000);
+            }
         }, 1000);
     </script>
 </body>
