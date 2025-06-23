@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deck of Cards API</title>
+</head>
+<body>
+    <h1>Deck of Cards API</h1>
+    <p>Check the console to see the API results</p>
+
+    <script>
+        setTimeout(() => {
+            fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Deck created:', data);
+                    
+                    // Draw 5 cards from the deck
+                    return fetch(`https://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=5`);
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Cards drawn:', data);
+                    console.log('Cards:', data.cards);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }, 1000);
+    </script>
+</body>
+</html>
